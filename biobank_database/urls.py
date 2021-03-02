@@ -19,5 +19,6 @@ from django.urls import path, include
 # project-level URL patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('hello_world.urls'))  # new link URLS from our app
+    path('hw/', include('hello_world.urls')),  # new link URLS from our app
+    path('', include('pages.urls')),
 ]
