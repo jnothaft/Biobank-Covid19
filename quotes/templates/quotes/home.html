@@ -1,0 +1,18 @@
+<!-- quotes/home.html -->
+
+<h1>Showing All Quotes</h1>
+
+<!-- display the context data -->
+
+<!-- create a loop to display the quotes -->
+<ul>
+    {% for quote in quotes %}
+        <li>{{quote.text}} - {{quote.author}} <br>
+        <img src="{{quote.image_url}}" style="max-width:400;">
+
+        </li>
+
+
+{% endfor %}
+</ul>
+
