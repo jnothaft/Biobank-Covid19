@@ -42,7 +42,7 @@
 
     <div class="topnav">
         <a class="active" href="#home">Log in or Register</a>
-        <a href="#contact">Contact</a>
+        <a href="{% url 'contact' %}">Contact</a>
         <a href="#inventory">Inventory</a>
         <a href="#order">Order</a>
         <a href="{% url 'about' %}">About</a>
@@ -53,7 +53,7 @@
         {%block content %}
         {% endblock %}
         <hr>
-        This page waas brought to you by jnothaft@bu.edu
+        This page was brought to you by jnothaft@bu.edu
 
 
     </body>

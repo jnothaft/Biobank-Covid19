@@ -24,5 +24,5 @@ urlpatterns = [
     path('quotes/', include('quotes.urls')),
     path('mini_fb/', include('mini_fb.urls')),
     path('mini_fb/', include('mini_fb.urls')),
-    path('contact/', include('contact.urls')),
+
 ]

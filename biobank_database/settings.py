@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'mini_fb.apps.MiniFbConfig',
 
     # contact form app
-    "contact.apps.ContactConfig",
+   # "pages.apps.ContactConfig",
 ]
 
 MIDDLEWARE = [
