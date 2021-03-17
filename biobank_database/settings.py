@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'quotes.apps.QuotesConfig',
     'mini_fb.apps.MiniFbConfig',
 
-    # contact form app
-   # "pages.apps.ContactConfig",
+
 ]
 
 MIDDLEWARE = [

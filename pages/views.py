@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, CreateView
 from pages.models import Contact
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from pages.cform import ContactForm
+from pages.forms import ContactForm
 
 
 # Create your views here.
@@ -32,6 +32,8 @@ class ContactCreate(CreateView):
     # fields = ContactForm
     form_class = ContactForm
     success_url = reverse_lazy("thanks")
+    template_name = "pages/contact_form.html"
+    #context_object_name = "contact_form"
 
 
 def thanks(request):

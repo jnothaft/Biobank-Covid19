@@ -7,6 +7,7 @@ class Contact(models.Model):
     """Create a contact form for the Biobank"""
     first_name = models.CharField(max_length=400)
     last_name = models.CharField(max_length=400)
+    email = models.EmailField()
     message = models.TextField()
 
     def __str__(self):
