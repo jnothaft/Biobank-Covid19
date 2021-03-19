@@ -2,7 +2,7 @@
 
 from django.forms import ModelForm
 from django.forms import Textarea
-from pages.models import Contact
+from pages.models import Contact, Request
 
 
 class ContactForm(ModelForm):
@@ -16,3 +16,12 @@ class ContactForm(ModelForm):
                 }
             )
         }
+
+
+class RequestForm(ModelForm):
+    class Meta:
+        model = Request
+
+        fields = ["first_name", "last_name", "email", "orcid", "institution", "project_title",
+                  "project_description", "positive_samples", "negative_samples", "sample_information"
+                  ]
