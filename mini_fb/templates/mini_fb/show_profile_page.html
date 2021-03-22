@@ -26,6 +26,8 @@ Create a page for a single profile
             <th>Message</th>
         </tr>
         <tr>
+            {% load tz %}
+            {% timezone "Europe/Paris" %}
             {% for message in person.get_status_messages %}
                 <td>{{message.timestamp}}</td>
                 <td>{{message.message}}</td>
@@ -33,6 +35,7 @@ Create a page for a single profile
         </tr>
     </table>
             {% endfor %}
+            {% endtimezone %}
 {% endblock %}
 
 
