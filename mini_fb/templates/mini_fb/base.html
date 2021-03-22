@@ -1,0 +1,18 @@
+<!-- mini_fb/base.html
+Julia Santos Nothaft (jnothaft@bu.edu)
+Base style page for the mini_fb app -->
+
+<html>
+    <head>
+            <title>Mini Facebook</title>
+    </head>
+    <body>
+        <h1>Mini Facebook</h1>
+        <p>
+            <a href="{% url 'show_all_profiles'%}">Home</a>
+        </p>
+        {%block content %}
+        {% endblock %}
+
+    </body>
+</html>

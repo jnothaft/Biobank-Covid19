@@ -1,23 +1,29 @@
 <!-- mini_fb/show_all_profiles.html -->
 
-<h1>MiniFacebook</h1>
-<h2>Showing all Profiles</h2>
+{% extends 'mini_fb/base.html' %}
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Hometown</th>
-        <th>Image</th>
-    </tr>
-    <tr>
-    {% for profile in mini_fb %}
+{% block content %}
+    <h2>Showing all Profiles</h2>
 
-        <td>{{profile.first_name}} {{profile.last_name}}</td>
-        <td>{{profile.city}}</td>
-        <td><img src="{{profile.image_url}}" style="height:100;"></td>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Hometown</th>
+            <th>Image</th>
+        </tr>
+        <tr>
+        {% for profile in mini_fb %}
 
-    </tr>
-    {% endfor %}
-</table>
+            <td><a href="{% url 'show_profile_page' profile.pk %}">{{profile.first_name}} {{profile.last_name}}</a> </td>
+            <td>{{profile.city}}</td>
+            <td><a href="{% url 'show_profile_page' profile.pk %}"><img src="{{profile.image_url}}" style="height:100;"></a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
+
 
 
