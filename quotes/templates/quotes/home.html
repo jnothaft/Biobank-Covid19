@@ -7,8 +7,8 @@
 <!-- create a loop to display the quotes -->
 <ul>
     {% for quote in quotes %}
-        <li>{{quote.text}} - {{quote.author}} <br>
-        <img src="{{quote.image_url}}" style="max-width:400;">
+        <li>{{quote.text}} - {{quote.person}} <br>
+        <img src="{{quote.person.get_random_image}}" style="max-width:400;">
 
         </li>
 

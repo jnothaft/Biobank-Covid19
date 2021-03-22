@@ -1,0 +1,22 @@
+<!-- quotes/person.html -->
+
+<h1>All quotes by {{person}}</h1>
+
+<ul>
+{% for quote in person.get_all_quotes %}
+    <li>{{quote.text}}</li>
+
+{% endfor %}
+
+</ul>
+
+
+<h1>All Images by {{person}}</h1>
+
+<ul>
+{% for image in person.get_all_images %}
+    <li><img src="{{image}}" style="height:400"></li>
+
+{% endfor %}
+
+</ul>
