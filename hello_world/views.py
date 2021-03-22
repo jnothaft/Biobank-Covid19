@@ -8,7 +8,7 @@ import time
 
 def homePageView(request):
     """ Respond to an HTTP request with a simple web page."""
-
+    print(request.user)
     response_html = '''
     <html>
     <h1>Hello, world!</h1>

@@ -10,7 +10,8 @@ urlpatterns = [
     path('schedule', SchedulePageView.as_view(), name='schedule'),
     path('contact', ContactCreate.as_view(), name='contact'),
     path('thanks', thanks, name='thanks'),
-    path('request', RequestCreate.as_view(), name='request'),
+    path('order', OrderCreate.as_view(), name='order'),
+    path('personal', PersonalPageView.as_view(), name='personal'),
 ]
 
 

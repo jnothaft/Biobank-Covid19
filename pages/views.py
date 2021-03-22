@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView
-from pages.models import Contact, Request
+from pages.models import Contact, Order
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from pages.forms import *
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
@@ -36,15 +37,21 @@ class ContactCreate(CreateView):
     # context_object_name = "contact_form"
     contact_form = ContactForm()
 
+
 def thanks(request):
     """Thank you message after the form is submitted"""
     return HttpResponse("Thank you! We will get in touch soon!")
 
 
-class RequestCreate(CreateView):
+class OrderCreate(CreateView):
     """Create fields for the sample request form"""
-    model = Request
-    form_class = RequestForm
+    model = Order
+    form_class = OrderForm
     success_url = reverse_lazy("thanks")
-    template_name = "pages/request.html"
-    request_form = RequestForm()
+    template_name = "pages/order.html"
+    request_form = OrderForm()
+
+
+class PersonalPageView(TemplateView):
+    """user personal page"""
+    template_name = "pages/personal.html"

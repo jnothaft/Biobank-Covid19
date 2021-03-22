@@ -15,7 +15,7 @@ class Contact(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
-class Request(models.Model):
+class Order(models.Model):
     """Create a model for the sample request form for the biobank"""
     first_name = models.CharField(max_length=400)
     last_name = models.CharField(max_length=400)
