@@ -19,16 +19,20 @@ Create a page for a single profile
     </p>
 
     <h2>Status Message</h2>
-    <table>
+
+    <table style="text-align: left">
         <tr>
             <th>Time</th>
             <th>Message</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            {% for message in person.get_status_messages %}
+                <td>{{message.timestamp}}</td>
+                <td>{{message.message}}</td>
+
         </tr>
     </table>
+            {% endfor %}
 {% endblock %}
 
 

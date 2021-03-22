@@ -1,4 +1,6 @@
 # mini_fb/models.py
+# Julia Santos Nothaft (jnothaft@bu.edu)
+# Models for the mini_fb app
 from django.db import models
 
 
@@ -16,3 +18,19 @@ class Profile(models.Model):
         """Retrieve a string representation of the profile name"""
 
         return f'{self.first_name} {self.last_name}'
+
+    def get_status_messages(self):
+        """get status message for a profile"""
+        return StatusMessage.objects.filter(profile=self)
+
+
+class StatusMessage(models.Model):
+    """Model the data attributes of Facebook status message"""
+    timestamp = models.TimeField(auto_now=True, blank=True)
+    message = models.TextField(blank=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        """Retrieve a string representation of the status message"""
+
+        return f'{self.timestamp} {self.profile}'
