@@ -1,0 +1,25 @@
+<!-- mini_fb/update_profile_form.html
+Julia Santos Nothaft
+Web page for the create profile form -->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h1>Update your profile</h1>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+    <tr>
+        {{form.as_table}}
+
+    </tr>
+    <tr>
+        <td></td>
+        <td>  <input type="submit" value="Update profile"> </td>
+    </tr>
+    </table>
+
+
+</form>
+
+{% endblock %}

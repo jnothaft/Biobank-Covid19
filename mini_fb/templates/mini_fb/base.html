@@ -8,9 +8,10 @@ Base style page for the mini_fb app -->
     </head>
     <body>
         <h1>Mini Facebook</h1>
-        <p>
+        <header>
             <a href="{% url 'show_all_profiles'%}">Home</a>
-        </p>
+            <a href="{% url 'create_profile'%}">Create Profile</a>
+        </header>
         {%block content %}
         {% endblock %}
 

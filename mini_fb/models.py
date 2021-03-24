@@ -5,6 +5,8 @@ from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
+
 
 class Profile(models.Model):
     """Creates a facebook profile for a person"""
@@ -16,12 +18,16 @@ class Profile(models.Model):
 
     def __str__(self):
         """Retrieve a string representation of the profile name"""
-
         return f'{self.first_name} {self.last_name}'
 
     def get_status_messages(self):
         """get status message for a profile"""
         return StatusMessage.objects.filter(profile=self)
+
+    def get_absolute_url(self):
+        """Provide a url to show this object"""
+        # profile/<int:pk>
+        return reverse('show_profile_page', kwargs={'pk': self.pk})
 
 
 class StatusMessage(models.Model):

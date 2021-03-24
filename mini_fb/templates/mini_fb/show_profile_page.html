@@ -6,6 +6,9 @@ Create a page for a single profile
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
+
+    <h4><a href="{% url 'update_profile' person.pk %}">Edit this profile</a> </h4>
+
     <center>
         <h3>{{person.first_name}} {{person.last_name}}</h3>
 
@@ -33,6 +36,7 @@ Create a page for a single profile
                 <td>{{message.message}}</td>
 
         </tr>
+
     </table>
             {% endfor %}
             {% endtimezone %}

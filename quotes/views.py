@@ -1,7 +1,7 @@
 import random
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Quote, Person
 from .forms import CreateQuoteForm, UpdateQuoteForm
 
@@ -52,7 +52,7 @@ class CreateQuoteView(CreateView):
     template_name = "quotes/create_quote_form.html"
 
 
-class UpdateQuoteView(CreateView):
+class UpdateQuoteView(UpdateView):
     """Create a new Quote object and store it in the database"""
     model = Quote
     form_class = UpdateQuoteForm
