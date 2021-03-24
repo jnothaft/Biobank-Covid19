@@ -21,16 +21,30 @@ Create a page for a single profile
         {{person.city}}
     </p>
 
-    <h2>Status Message</h2>
+    <h2>Post a Status Message</h2>
+    <form method="POST" action="{% url 'post_status' person.pk %}">
+        {% csrf_token %}
+        <table>
+        <tr>
+            {{create_status_form}}
 
+        </tr>
+        <tr>
+            <td></td>
+            <td>  <input type="submit" value="Share"> </td>
+        </tr>
+        </table>
+    </form>
+
+
+    <h2>Status Message</h2>
     <table style="text-align: left">
         <tr>
             <th>Time</th>
             <th>Message</th>
         </tr>
         <tr>
-            {% load tz %}
-            {% timezone "Europe/Paris" %}
+
             {% for message in person.get_status_messages %}
                 <td>{{message.timestamp}}</td>
                 <td>{{message.message}}</td>
@@ -39,7 +53,7 @@ Create a page for a single profile
 
     </table>
             {% endfor %}
-            {% endtimezone %}
+
 {% endblock %}
 
 

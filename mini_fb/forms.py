@@ -25,3 +25,13 @@ class UpdateProfileForm(forms.ModelForm):
 
         model = Profile
         fields = ['city', 'email', 'image_url']
+
+
+class CreateStatusMessageForm(forms.ModelForm):
+    """A form to submit a new status message"""
+    class Meta:
+        """Additional data about this form"""
+
+        model = StatusMessage
+        fields = ['message']
+
