@@ -6,7 +6,7 @@
 <center>
     <h1>{{quote.text}}  </h1>
     <h3> <a href="{% url 'person' quote.person.pk %}">  - {{quote.person}} </a></h3>
-    <img src="{{quote.person.get_random_image}}" style="max-width:400;">
+    <img src="{{quote.person.get_random_image}}" style="height:200">
     <h4><a href="{% url 'update_quote' quote.pk %}">Update this quote</a> </h4>
 </center>
 

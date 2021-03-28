@@ -3,6 +3,7 @@ from django.db import models
 import random
 from django.urls import reverse
 
+
 # Create your models here.
 
 
@@ -41,6 +42,7 @@ class Quote(models.Model):
     # data attributes
     text = models.TextField(blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+
     # author = models.TextField(blank=True)
     # image_url = models.URLField(blank=True)
 
@@ -55,16 +57,16 @@ class Quote(models.Model):
         return reverse('quote', kwargs={'pk': self.pk})
 
 
-
 class Image(models.Model):
     """Represent an image URL for a person"""
 
     image_url = models.URLField(blank=True)
+    image_file = models.ImageField(blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     def __str__(self):
         """Retrieve a string representation of this quote"""
-
-        return self.image_url
-
-
+        if self.image_url:
+            return self.image_url
+        else:
+            return self.image_file.url
