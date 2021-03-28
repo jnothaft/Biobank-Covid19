@@ -20,10 +20,11 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hw/', include('hello_world.urls')),  # new link URLS from our app
-    path('pages/', include('pages.urls')),
+    path('', include('pages.urls')),
     path('quotes/', include('quotes.urls')),
     path('mini_fb/', include('mini_fb.urls')),
     # path('mini_fb/', include('mini_fb.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('registration/', include('registration.urls')),
 
 ]

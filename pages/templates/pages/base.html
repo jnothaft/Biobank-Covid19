@@ -43,13 +43,18 @@
     <div class="topnav">
 
         {% if user.is_authenticated %}
-             <a class="active" href="pages/personal/">Welcome, {{request.user}}</a>
+<!--             <a class="active" href="{% url 'personal' %}">Welcome, {{request.user}}</a>-->
+             <a class="active" href="/logout/?next=/">Logout</a>
         {% else %}
-            <a class="active" href="/login/?next=/pages/">Log in or Register</a>
+            <a class="active" href="/login/?next=/personal">Log in or Register</a>
         {% endif %}
         <a href="{% url 'contact' %}">Contact</a>
         <a href="#inventory">Inventory</a>
-        <a href="{% url 'order' %}">Order</a>
+<!--        {% if user.is_authenticated %}-->
+            <a href="{% url 'order' %}">Order</a>
+<!--         {% else %}-->
+            <a href="/login/?next=/order">Order</a>
+<!--        {% endif %}-->
         <a href="{% url 'about' %}">About</a>
         <a href="{% url 'schedule' %}">Schedule</a>
         <a href="{% url 'home' %}"; style="float:left">PDC Covid-19 Biobank</a>

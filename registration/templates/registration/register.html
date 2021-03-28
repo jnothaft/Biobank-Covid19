@@ -1,0 +1,9 @@
+<!-- registration/register.html -->
+
+<h1>Register for a new account</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>

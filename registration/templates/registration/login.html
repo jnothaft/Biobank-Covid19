@@ -4,8 +4,11 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{form}}
+    {{form.as_table}}
     <input type="submit">
 </form>
+
+<h2>Don't have an account?</h2>
+<a href="/registration/register">Register here</a> for a new account.
 
 {% endblock %}
