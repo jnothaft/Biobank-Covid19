@@ -35,6 +35,7 @@ class StatusMessage(models.Model):
     timestamp = models.TimeField(auto_now=True, blank=True)
     message = models.TextField(blank=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True)
 
     def __str__(self):
         """Retrieve a string representation of the status message"""

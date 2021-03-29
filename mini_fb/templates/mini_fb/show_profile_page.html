@@ -22,7 +22,7 @@ Create a page for a single profile
     </p>
 
     <h2>Post a Status Message</h2>
-    <form method="POST" action="{% url 'post_status' person.pk %}">
+    <form method="POST" action="{% url 'post_status' person.pk %}" enctype='multipart/form-data'>
         {% csrf_token %}
         <table>
         <tr>
@@ -47,7 +47,11 @@ Create a page for a single profile
 
             {% for message in person.get_status_messages %}
                 <td>{{message.timestamp}}</td>
-                <td>{{message.message}}</td>
+                <td>{{message.message}} <br>
+                {% if message.image %}
+                <img src='{{message.image.url}}' style='max-height: 200;'>
+                {% endif %}
+                </td>
 
         </tr>
 

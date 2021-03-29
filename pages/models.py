@@ -31,3 +31,5 @@ class Order(models.Model):
     def __str__(self):
         """String rep of the name of the person requesting samples"""
         return f"{self.first_name} {self.last_name}, {self.institution}"
+
+

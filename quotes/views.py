@@ -8,6 +8,7 @@ from .forms import CreateQuoteForm, UpdateQuoteForm, AddImageForm
 from django.urls import reverse
 from django.shortcuts import redirect
 
+
 # Create your views here.
 
 class HomePageView(ListView):
@@ -44,13 +45,14 @@ class PersonPageView(DetailView):
     """Display a single Person object"""
     model = Person  # retrieve Quote objects from the database
     template_name = "quotes/person.html"
+
     # context_object_name = "person"
 
     def get_context_data(self, **kwargs):
         """Return a dictionary with context data for this template to use"""
         # get the default context data:
         # this will include the Person record for this page view
-        context  = super(PersonPageView, self). get_context_data(**kwargs)
+        context = super(PersonPageView, self).get_context_data(**kwargs)
 
         # create add image form
         add_image_form = AddImageForm()
@@ -58,7 +60,6 @@ class PersonPageView(DetailView):
 
         # return the context dictionary:
         return context
-
 
 
 class CreateQuoteView(CreateView):
@@ -79,7 +80,8 @@ class DeleteQuoteView(DeleteView):
     """Delete a Quote object and store it in the database"""
     template_name = "quotes/delete_quote.html"
     queryset = Quote.objects.all()
-    #success_url = "../../all"
+
+    # success_url = "../../all"
 
     def get_success_url(self):
         """Return  the url to which we should be directed after the delete"""
@@ -91,7 +93,8 @@ class DeleteQuoteView(DeleteView):
         person = quote.person
         return reverse('person', kwargs={'pk': person.pk})
 
-def add_image(request,pk):
+
+def add_image(request, pk):
     """A custom view function to handle the submission of an image upload"""
 
     # find the person for whom we are submitting the image

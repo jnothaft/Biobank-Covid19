@@ -65,7 +65,7 @@ def post_status_message(request, pk):
         # print(request.POST) # for debugging at the console
 
         # create the form object from the request's POST data
-        form = CreateStatusMessageForm(request.POST or None)
+        form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
 
         if form.is_valid():
             # create the StatusMessage object with the data in the CreateStatusMessageForm
