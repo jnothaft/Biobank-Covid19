@@ -42,17 +42,21 @@ Create a page for a single profile
         <tr>
             <th>Time</th>
             <th>Message</th>
+            <th></th>
         </tr>
         <tr>
 
             {% for message in person.get_status_messages %}
                 <td>{{message.timestamp}}</td>
-                <td>{{message.message}} <br>
+                <td>{{message.message}}
                 {% if message.image %}
-                <img src='{{message.image.url}}' style='max-height: 200;'>
+                <br><img src='{{message.image.url}}' style='max-height: 200;'>
                 {% endif %}
                 </td>
-
+                <td>
+                    <a href="{% url 'delete_status' profile_pk=person.pk status_pk=message.pk %}">Delete</a>
+                </td>
+            <br>
         </tr>
 
     </table>

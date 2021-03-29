@@ -3,10 +3,10 @@
 # Views for the mini_fb app
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
-from .models import Profile
+from .models import Profile, StatusMessage
 from django.shortcuts import redirect
 from django.urls import reverse
 
@@ -51,13 +51,14 @@ class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_fb/update_profile_form.html"
+    queryset = Profile.objects.all()
 
 
 # custom classes:
 def post_status_message(request, pk):
-    '''
+    """
     Process a form submission to post a new status message.
-    '''
+    """
 
     # if and only if we are processing a POST request, try to read the data
     if request.method == 'POST':
@@ -83,3 +84,60 @@ def post_status_message(request, pk):
     # redirect the user to the show_profile_page view
     url = reverse('show_profile_page', kwargs={'pk': pk})
     return redirect(url)
+
+
+class DeleteStatusMessageView(DeleteView):
+    """Delete a status message"""
+    template_name = "mini_fb/delete_status_form.html"
+    queryset = Profile.objects.all()
+
+    def get_context_data(self, **kwargs):
+        """Return a dictionary with context data for this template to use"""
+        # obtain default context data
+        context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
+
+        # find status message
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        context['st_msg'] = st_msg
+
+        return context
+
+    def get_object(self):
+        """Return the StatusMessage object that should be deleted"""
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+        # find the StatusMessage object, and return it
+        status = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        return status
+
+    def get_success_url(self):
+        """Return  the url to which we should be directed after the delete"""
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+        # profile = StatusMessage.objects.get(pk=self.kwargs['profile_pk'])
+        # person = profile.profile
+        return reverse('show_profile_page', kwargs={'pk': profile_pk})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
