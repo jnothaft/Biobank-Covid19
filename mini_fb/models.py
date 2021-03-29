@@ -2,6 +2,7 @@
 # Julia Santos Nothaft (jnothaft@bu.edu)
 # Models for the mini_fb app
 from django.db import models
+from PIL import Image
 
 
 # Create your models here.
