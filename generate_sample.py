@@ -27,7 +27,7 @@ d = random_date(START_DATE, END_DATE)
 sample_results = random.choices(['positive', 'negative'],
                                 weights=[POSITIVE_CASE_FREQ, 1 - POSITIVE_CASE_FREQ],
                                 k=TOTAL_TEST_COUNT)
-
+sample_type = ['AN'] * TOTAL_TEST_COUNT
 test_type = ['RT-PCR'] * TOTAL_TEST_COUNT
 test_dates = [random_date(START_DATE, END_DATE) for _ in range(TOTAL_TEST_COUNT)]
 collection_site = random.choices(['Kilachand', 'Health Annex', '808 Gallery', 'Agganis Arena Lobby',
@@ -39,6 +39,6 @@ user_id_col = random.choices(users, k=100)
 
 ct_values = []
 
-df = pd.DataFrame([sample_results, test_type, test_dates, collection_site, user_id_col, ct_values]).T
-df.columns = ['sample_result', 'test_type', 'test_date', 'collection_site', 'user_id', 'ct_values']
+df = pd.DataFrame([user_id_col, test_dates, sample_results, test_type, sample_type, collection_site,  ct_values]).T
+df.columns = ['user_id', 'test_date', 'sample_result', 'test_type', 'sample_type', 'collection_site',  'ct_values']
 df.to_csv('example.csv')

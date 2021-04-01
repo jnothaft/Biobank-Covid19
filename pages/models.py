@@ -33,3 +33,16 @@ class Order(models.Model):
         return f"{self.first_name} {self.last_name}, {self.institution}"
 
 
+class Samples(models.Model):
+    """Create a model to store information about the samples in the biobank"""
+    user_id = models.TextField()
+    test_dates = models.TextField()
+    sample_results = models.TextField()
+    test_type = models.TextField()
+    sample_type = models.TextField()
+    collection_site = models.TextField()
+    ct_values = models.TextField()
+
+    def __str__(self):
+        """String rep of the name identifying the sample"""
+        return f"{self.test_dates}, {self.user_id}: {self.sample_results}"

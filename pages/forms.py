@@ -22,7 +22,8 @@ class ContactForm(ModelForm):
 options = [('Date of Swab', 'Date of Swab'),
            ('Type of Sample', 'Type of Sample'),
            ('Collection Site', 'Collection Site'),
-           ('Type of Test', 'Type of Test')]
+           ('Type of Test', 'Type of Test'),
+           ('Result of Test', 'Result of Test')]
 
 
 class OrderForm(ModelForm, Form):
@@ -37,4 +38,3 @@ class OrderForm(ModelForm, Form):
         fields = ["first_name", "last_name", "email", "orcid", "institution", "project_title",
                   "project_description", "positive_samples", "negative_samples", "sample_information"
                   ]
-
