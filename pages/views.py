@@ -35,10 +35,15 @@ class ContactCreate(CreateView):
     model = Contact
     # fields = ContactForm
     form_class = ContactForm
-    success_url = reverse_lazy("thanks")
+    success_url = "../../thanks"
     template_name = "pages/contact.html"
     # context_object_name = "contact_form"
     contact_form = ContactForm()
+
+
+class ThankYouView(TemplateView):
+    """Create a thank you page after the form is successfully submitted"""
+    template_name = "pages/thanks.html"
 
 
 def thanks(request):
@@ -52,7 +57,7 @@ class OrderCreate(LoginRequiredMixin, CreateView):
     form_class = OrderForm
     success_url = reverse_lazy("thanks")
     template_name = "pages/order.html"
-    success_url = reverse_lazy("OrderAuth")
+    success_url = "../../thanks"
     request_form = OrderForm()
     login_url = "/login"
 
@@ -100,3 +105,8 @@ def sample_upload(request):
         )
     context = {}
     return render(request, template_name, context)
+
+
+class InventoryView(TemplateView):
+    """View for the inventory of samples page"""
+    template_name = "pages/inventory.html"

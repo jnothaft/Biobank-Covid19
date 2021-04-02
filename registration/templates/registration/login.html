@@ -1,14 +1,121 @@
 <!-- registration/login.html -->
-
+{% extends 'pages/base.html' %}
 {% block content %}
+
+
+
+<style>
+                * {
+                  box-sizing: border-box;
+                }
+
+                input[type=text], select, textarea {
+                  width: 80%;
+                  padding: 12px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  resize: vertical;
+                  text-indent: 30px;
+                }
+
+                label {
+                  padding: 12px 12px 12px 0;
+                  display: inline-block;
+
+                }
+
+                input[type=email], select, textarea {
+                  width: 80%;
+                  padding: 12px;
+                  border: 1px solid #ccc;
+                  border-radius: 1px;
+                  resize: vertical;
+                }
+
+                input[type=password], select, textarea {
+                  width: 80%;
+                  padding: 12px;
+                  border: 1px solid #ccc;
+                  border-radius: 1px;
+                  resize: vertical;
+                }
+
+                label {
+                  padding: 12px 12px 12px 12px;
+                  display: inline-block;
+                }
+
+                input[type=submit] {
+                  background-color: #CC0000;
+                  color: white;
+                  padding: 12px 20px;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  float: left;
+                }
+
+                input[type=submit]:hover {
+                  background-color: #B00000;
+                }
+
+                .container {
+                  border-radius: 5px;
+                  background-color: #f2f2f2;
+                  padding: 20px;
+                }
+
+                .col-25 {
+                  float: left;
+                  width: 25%;
+                  margin-top: 6px;
+                }
+
+                .col-75 {
+                  float: left;
+                  width: 75%;
+                  margin-top: 6px;
+                }
+
+                /* Clear floats after the columns */
+                .row:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+
+                /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+                @media screen and (max-width: 600px) {
+                  .col-25, .col-75, input[type=submit] {
+                    width: 10%;
+                    margin-top: 0;
+                  }
+                }
+
+            </style>
 
 <form method="POST">
     {% csrf_token %}
-    {{form.as_table}}
-    <input type="submit">
+
+    <h2 style="padding-left:16px;">Login</h2>
+
+    <table>
+        <tr>
+            {{form.as_table}}
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit"></td>
+        </tr>
+
+    </table>
+
+
+
 </form>
 
-<h2>Don't have an account?</h2>
-<a href="/registration/register">Register here</a> for a new account.
+<h4 style="padding-left:16px;">Don't have an account?</h4>
+<a href="/registration/register" style="padding-left:16px;">Register here</a> for a new account.
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock %}
