@@ -44,10 +44,10 @@
 
         {% if user.is_authenticated %}
              <a class="active" href="/logout/?next=/">Logout</a>
-            <a class="active" href="{% url 'personal' %}">Welcome, {{request.user}}</a>
+            <a class="active" href="{% url 'home' %}">Welcome, {{request.user}}</a>
 
         {% else %}
-            <a class="active" href="/login/?next=/personal">Log in or Register</a>
+            <a class="active" href="/login/?next=/">Log in or Register</a>
         {% endif %}
         <a href="{% url 'contact' %}">Contact</a>
         <a href="{% url 'inventory' %}">Inventory</a>

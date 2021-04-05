@@ -5,8 +5,9 @@ from datetime import timedelta
 from datetime import datetime
 import random
 import string
+import matplotlib
 
-TOTAL_TEST_COUNT = 100
+TOTAL_TEST_COUNT = 100000
 POSITIVE_CASE_FREQ = 0.21
 NUM_PATIENTS = 40
 
@@ -35,10 +36,12 @@ collection_site = random.choices(['Kilachand', 'Health Annex', '808 Gallery', 'A
                                  k=TOTAL_TEST_COUNT)
 users = [''.join(random.choices(string.digits, k=12)) for _ in range(NUM_PATIENTS)]
 
-user_id_col = random.choices(users, k=100)
+user_id_col = random.choices(users, k=TOTAL_TEST_COUNT)
 
 ct_values = []
 
 df = pd.DataFrame([user_id_col, test_dates, sample_results, test_type, sample_type, collection_site,  ct_values]).T
 df.columns = ['user_id', 'test_date', 'sample_result', 'test_type', 'sample_type', 'collection_site',  'ct_values']
-df.to_csv('example.csv')
+df.to_csv('test1.csv')
+
+
