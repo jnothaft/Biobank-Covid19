@@ -36,6 +36,11 @@ class Profile(models.Model):
         queryset = self.friends.all()
         return queryset
 
+    def get_news_feed(self):
+        """Obtain and return the news feed messages for a profile"""
+        news = StatusMessage.objects.filter(profile__in=self.get_friends()).order_by("-timestamp")
+        return news
+
 
 class StatusMessage(models.Model):
     """Model the data attributes of Facebook status message"""

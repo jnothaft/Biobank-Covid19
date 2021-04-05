@@ -122,6 +122,11 @@ class DeleteStatusMessageView(DeleteView):
         return reverse('show_profile_page', kwargs={'pk': profile_pk})
 
 
+class ShowNewsFeedView(DetailView):
+    """Show the news feed for a profile"""
+    model = Profile
+    template_name = "mini_fb/show_news_feed.html"
+    context_object_name = "person"
 
 
 

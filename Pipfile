@@ -8,6 +8,7 @@ django = "==2.2.7"
 gunicorn = "*"
 numpy = "*"
 pandas = "*"
+Pillow = "*"
 
 [dev-packages]
 

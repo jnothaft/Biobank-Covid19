@@ -1,0 +1,29 @@
+<!--
+mini_fb/show_news_feed.html
+Julia Santos Nothaft (jnothaft@bu.edu)
+Create a page to display the news feed for a single profile
+-->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+
+    <header><a href="{% url 'show_profile_page' person.pk %}">Back to {{person.first_name}}'s profile page</a></header>
+    <h1>{{person.first_name}}'s News Feed</h1>
+    <table style="text-align:center">
+    {% for news in person.get_news_feed %}
+        <tr>
+            <td>{{news.timestamp}}</td>
+            <td><a href="{% url 'show_profile_page' news.profile.pk %}">{{news.profile.first_name}} {{news.profile.last_name}}</a></td>
+            <td><a href="{% url 'show_profile_page' news.profile.pk %}"><img src="{{news.profile.image_url}}" style="height:75;"></a></td>
+            <td>{{news.message}}
+                {% if news.image %}
+                <img src='{{news.image.url}}' style='max-height: 50;'>
+                {% endif %}<br>
+            </td>
+        </tr>
+
+    </table>
+    {% endfor %}
+
+{% endblock %}
