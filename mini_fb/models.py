@@ -43,6 +43,8 @@ class Profile(models.Model):
         """Obtain and return a QuerySet of all Profiles that could be
         added as friends"""
         possible_friends = Profile.objects.exclude(pk__in=self.get_friends())
+        possible_friends = possible_friends.exclude(pk=self.pk)
+
         return possible_friends
 
 
