@@ -3,8 +3,6 @@
 # Models for the mini_fb app
 from django.db import models
 
-
-
 # Create your models here.
 from django.urls import reverse
 
@@ -40,6 +38,12 @@ class Profile(models.Model):
         """Obtain and return the news feed messages for a profile"""
         news = StatusMessage.objects.filter(profile__in=self.get_friends()).order_by("-timestamp")
         return news
+
+    def get_friend_suggestions(self):
+        """Obtain and return a QuerySet of all Profiles that could be
+        added as friends"""
+        possible_friends = Profile.objects.exclude(pk__in=self.get_friends())
+        return possible_friends
 
 
 class StatusMessage(models.Model):

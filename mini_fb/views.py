@@ -129,20 +129,30 @@ class ShowNewsFeedView(DetailView):
     context_object_name = "person"
 
 
+class ShowPossibleFriendsView(DetailView):
+    """Show the possible friends a profile can add"""
+    model = Profile
+    template_name = "mini_fb/show_possible_friends.html"
+    context_object_name = "person"
 
 
+def add_friend(request, profile_pk, friend_pk):
+    """Process a request to add a friend to a profile"""
 
+    # find the Profile object which is adding the friend, and store it into a variable
+    profile = Profile.objects.get(pk=profile_pk)
 
+    # find the Profile object of the friend to add, and store it into another variable
+    friend = Profile.objects.get(pk=friend_pk)
 
+    # add that friend’s Profile into the profile.friends object (using the method add)
+    profile.friends.add(friend)
 
+    # save the profile object.
+    profile.save()
 
-
-
-
-
-
-
-
-
+    # redirect the user to the show_profile_page view
+    url = reverse('show_profile_page', kwargs={'pk': profile_pk})
+    return redirect(url)
 
 

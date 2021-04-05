@@ -1,0 +1,29 @@
+<!--
+mini_fb/show_possible_friends.html
+Julia Santos Nothaft (jnothaft@bu.edu)
+Create a page to display the possible friends a profile can
+add to their network
+-->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<header><a href="{% url 'show_profile_page' person.pk %}">Back to {{person.first_name}}'s profile page</a></header>
+    <h2>Friends Suggestions for {{person.first_name}}</h2>
+    <table style="text-align:center">
+        {% for suggestion in person.get_friend_suggestions %}
+        <tr>
+
+            <td><img src="{{suggestion.image_url}}" style="height:75;"></a></td>
+            <td>{{suggestion.first_name}} {{suggestion.last_name}}</td>
+            <td> <form method="GET" action="{% url 'add_friend' person.pk suggestion.pk %}">
+                    {% csrf_token %}
+                    <input type="submit" name="Add Friend" value="Add Friend">
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+    {% endfor %}
+
+{% endblock %}

@@ -9,7 +9,12 @@ Create a page for a single profile
 
     <h4>
         <a href="{% url 'update_profile' person.pk %}">Edit this profile</a> |
-        <a href="{% url 'news_feed' person.pk %}">Show {{person.first_name}}'s News Feed</a>
+        <a href="{% url 'news_feed' person.pk %}">
+            Show {{person.first_name}}'s News Feed
+        </a> |
+        <a href="{% url 'show_possible_friends' person.pk %}">
+            Find Friends
+        </a>
     </h4>
 
     <center>
@@ -40,30 +45,30 @@ Create a page for a single profile
     </form>
 
 
-<!--    <h2>Status Message</h2>-->
-<!--    <table style="text-align: left">-->
-<!--        <tr>-->
-<!--            <th>Time</th>-->
-<!--            <th>Message</th>-->
-<!--            <th></th>-->
-<!--        </tr>-->
-<!--        <tr>-->
+    <h2>Status Message</h2>
+    <table style="text-align: left">
+        <tr>
+            <th>Time</th>
+            <th>Message</th>
+            <th></th>
+        </tr>
+        <tr>
 
-<!--            {% for message in person.get_status_messages %}-->
-<!--                <td>{{message.timestamp}}</td>-->
-<!--                <td>{{message.message}}-->
-<!--                {% if message.image %}-->
-<!--                <br><img src='{{message.image.url}}' style='max-height: 200;'>-->
-<!--                {% endif %}-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a href="{% url 'delete_status' profile_pk=person.pk status_pk=message.pk %}">Delete</a>-->
-<!--                </td>-->
-<!--            <br>-->
-<!--        </tr>-->
+            {% for message in person.get_status_messages %}
+                <td>{{message.timestamp}}</td>
+                <td>{{message.message}}
+                {% if message.image %}
+                <br><img src='{{message.image.url}}' style='max-height: 200;'>
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'delete_status' profile_pk=person.pk status_pk=message.pk %}">Delete</a>
+                </td>
+            <br>
+        </tr>
 
-<!--    </table>-->
-<!--            {% endfor %}-->
+    </table>
+            {% endfor %}
 
     <h2>{{person.first_name}}'s Friends</h2>
 

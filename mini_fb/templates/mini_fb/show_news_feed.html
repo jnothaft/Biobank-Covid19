@@ -9,7 +9,7 @@ Create a page to display the news feed for a single profile
 
 
     <header><a href="{% url 'show_profile_page' person.pk %}">Back to {{person.first_name}}'s profile page</a></header>
-    <h1>{{person.first_name}}'s News Feed</h1>
+    <h2>{{person.first_name}}'s News Feed</h2>
     <table style="text-align:center">
     {% for news in person.get_news_feed %}
         <tr>
