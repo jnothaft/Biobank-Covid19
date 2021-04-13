@@ -3,6 +3,9 @@ from django.db import models
 
 # Create your models here.
 
+class Customer(models.Model):
+    """Create a customer class for the user"""
+
 class Contact(models.Model):
     """Create a contact form for the Biobank"""
     first_name = models.CharField(max_length=400)

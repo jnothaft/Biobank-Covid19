@@ -116,32 +116,6 @@ class InventoryView(TemplateView):
         context = super().get_context_data(**kwargs)
 
 
-def post_status_message(request, pk):
-    """
-    Process a form submission to post a new status message.
-    """
-
-    # if and only if we are processing a POST request, try to read the data
-    if request.method == 'POST':
-
-        # print(request.POST) # for debugging at the console
-
-        # create the form object from the request's POST data
-        form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
-
-        if form.is_valid():
-            # create the StatusMessage object with the data in the CreateStatusMessageForm
-            status_message = form.save(commit=False)  # don't commit to database yet
-
-            # find the profile that matches the `pk` in the URL
-            profile = Profile.objects.get(pk=pk)
-
-            # attach FK profile to this status message
-            status_message.profile = profile
-
-            # now commit to database
-            status_message.save()
-
-    # redirect the user to the show_profile_page view
-    url = reverse('show_profile_page', kwargs={'pk': pk})
-    return redirect(url)
+class ServicesView(TemplateView):
+    """View for the services information page"""
+    template_name = "pages/services.html"

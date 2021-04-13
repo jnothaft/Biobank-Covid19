@@ -21,7 +21,7 @@ class ContactForm(ModelForm):
 
 options = [('Date of Swab', 'Date of Swab'),
            ('Type of Sample', 'Type of Sample'),
-           ('Collection Site', 'Collection Site'),
+           ('CT values', 'CT values'),
            ('Type of Test', 'Type of Test'),
            ('Result of Test', 'Result of Test')]
 
