@@ -1,10 +1,14 @@
-<!-- registration/login.html -->
+<!-- project/contact.html -->
+
 {% extends 'project/base.html' %}
+
 {% block content %}
-
-
-
-<style>
+    <head>
+        <title>Contact me!</title>
+    </head>
+    <body>
+        <form method="POST" action="{% url 'contact' %}">
+            <style>
                 * {
                   box-sizing: border-box;
                 }
@@ -32,20 +36,12 @@
                   resize: vertical;
                 }
 
-                input[type=password], select, textarea {
-                  width: 80%;
-                  padding: 12px;
-                  border: 1px solid #ccc;
-                  border-radius: 1px;
-                  resize: vertical;
-                }
-
                 label {
                   padding: 12px 12px 12px 12px;
                   display: inline-block;
                 }
 
-                input[type=submit] {
+                button[type=submit] {
                   background-color: #CC0000;
                   color: white;
                   padding: 12px 20px;
@@ -55,7 +51,7 @@
                   float: left;
                 }
 
-                input[type=submit]:hover {
+                button[type=submit]:hover {
                   background-color: #B00000;
                 }
 
@@ -91,31 +87,30 @@
                     margin-top: 0;
                   }
                 }
-
             </style>
+            <h1 style="text-indent: 12px;">Contact</h1>
 
-<form method="POST">
-    {% csrf_token %}
+            <p style="text-indent: 12px;">
+                If you have any general questions, please e-mail us below and
+                your question will be directed to the appropriate person.
+            </p>
 
-    <h2 style="padding-left:16px;">Login</h2>
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit">SUBMIT</button>
+                    </td>
+                </tr>
+            </table>
+                <br>
 
-    <table>
-        <tr>
-            {{form.as_table}}
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit"></td>
-        </tr>
-
-    </table>
+                <br><br><br>
+        </form>
+    </body>
 
 
 
-</form>
-
-<h4 style="padding-left:16px;">Don't have an account?</h4>
-<a href="/registration/register" style="padding-left:16px;">Register here</a> for a new account.
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock %}

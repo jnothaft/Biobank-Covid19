@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hw/', include('hello_world.urls')),  # new link URLS from our app
-    path('', include('pages.urls')),
+    path('', include('project.urls')),
     path('quotes/', include('quotes.urls')),
     path('mini_fb/', include('mini_fb.urls')),
     # path('mini_fb/', include('mini_fb.urls')),

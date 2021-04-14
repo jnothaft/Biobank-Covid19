@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hello_world.apps.HelloWorldConfig',  # new application!
-    'pages.apps.PagesConfig',
+    'project.apps.PagesConfig',
     'quotes.apps.QuotesConfig',
     'mini_fb.apps.MiniFbConfig',
     'registration.apps.RegistrationConfig'
@@ -123,8 +123,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = "/media/"
 
-LOGIN_REDIRECT_URL = '/pages/'
-LOGOUT_REDIRECT_URL = '/pages/'
+LOGIN_REDIRECT_URL = '/project/'
+LOGOUT_REDIRECT_URL = '/project/'
 
 
 
