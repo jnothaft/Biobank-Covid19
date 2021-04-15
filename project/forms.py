@@ -19,6 +19,14 @@ class ContactForm(ModelForm):
         }
 
 
+class ResearcherForm(ModelForm, Form):
+    """For to order COVID-19 samples"""
+
+    class Meta:
+        model = Researcher
+        fields = ["first_name", "last_name", "email", "orcid"]
+
+
 options = [('Date of Swab', 'Date of Swab'),
            ('Type of Sample', 'Type of Sample'),
            ('CT values', 'CT values'),
@@ -35,8 +43,8 @@ class OrderForm(ModelForm, Form):
     )
 
     class Meta:
-        model = Researcher
-        fields = ["first_name", "last_name", "email", "orcid"]
+        # model = Researcher
+        # fields = ["first_name", "last_name", "email", "orcid"]
 
         model = Order
         fields = [ "institution", "project_title",

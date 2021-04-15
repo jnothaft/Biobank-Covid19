@@ -5,6 +5,8 @@ from .models import *
 
 admin.site.register(Contact)
 
+admin.site.register(Researcher)
+
 admin.site.register(Order)
 
 admin.site.register(Samples)

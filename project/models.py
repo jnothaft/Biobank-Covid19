@@ -1,3 +1,7 @@
+# project/models.py
+# Julia Santos Nothaft (jnothaft@bu.edu)
+# Database models for the Covid-19 Biobank
+
 from django.db import models
 
 
@@ -30,18 +34,18 @@ class Researcher(models.Model):
 
 class Order(models.Model):
     """Create a model for the sample request form for the biobank"""
-    researcher = models.ForeignKey(Researcher, on_delete=models.CASCADE)
+    researcher = models.ForeignKey(Researcher, on_delete=models.CASCADE, blank=True, null=True)
     institution = models.CharField(max_length=400)
     project_title = models.CharField(max_length=400)
     project_description = models.TextField()
     positive_samples = models.PositiveIntegerField()
     negative_samples = models.PositiveIntegerField()
     sample_information = models.TextField()
-    date_request = models.TextField(blank=True)
+    date_request = models.DateField(auto_now_add=True)
 
     def __str__(self):
         """String rep of the name of the person requesting samples"""
-        return f" {self.date_request} "
+        return f" {self.date_request}: {self.project_title} "
 
 
 class Samples(models.Model):
