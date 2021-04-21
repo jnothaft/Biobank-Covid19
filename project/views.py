@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 import csv, io
 from django.contrib import messages
+from django.forms.models import inlineformset_factory
 
 
 # Create your views here.
@@ -50,16 +51,41 @@ def thanks(request):
     """Thank you message after the form is submitted"""
     return HttpResponse("Thank you! We will get in touch soon!")
 
+OrderFormset = inlineformset_factory(
+    Researcher, Order, fields=("institution",
+                               "project_title", "project_description", "positive_samples",
+                               "negative_samples", "sample_information", 'RNA_extraction'),
+    extra=1, can_order=False, can_delete=False
+)
+
 
 class OrderCreate(LoginRequiredMixin, CreateView):
     """Create fields for the sample request form"""
-    model = Order
-    form_class = OrderForm
-    success_url = reverse_lazy("thanks")
+    model = Researcher
+    form_class = ResearcherForm
     template_name = "project/order.html"
     success_url = "../../thanks"
-    request_form = OrderForm()
+    request_form = ResearcherForm()
     login_url = "/login"
+
+    def get_context_data(self, **kwargs):
+        # we need to overwrite get_context_data
+        # to make sure that our formset is rendered
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data["order"] = OrderFormset(self.request.POST)
+        else:
+            data["order"] = OrderFormset()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        order = context["order"]
+        self.object = form.save()
+        if order.is_valid():
+            order.instance = self.object
+            order.save()
+        return super().form_valid(form)
 
 
 class PersonalPageView(LoginRequiredMixin, TemplateView):

@@ -41,6 +41,7 @@ class Order(models.Model):
     positive_samples = models.PositiveIntegerField()
     negative_samples = models.PositiveIntegerField()
     sample_information = models.TextField()
+    RNA_extraction = models.TextField(blank=True)
     date_request = models.DateField(auto_now_add=True)
 
     def __str__(self):

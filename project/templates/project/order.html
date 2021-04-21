@@ -5,7 +5,7 @@
         <title>Order Samples</title>
     </head>
     <body>
-        <form method="POST" action="{% url 'order' %}">
+
 
             <style>
                 * {
@@ -96,16 +96,24 @@
                 }
 
             </style>
+
             <h1 style="text-indent: 12px;">Order Samples</h1>
 
             <p style="text-indent: 12px;">
                 If you have any general questions, please e-mail us below and
                 your question will be directed to the appropriate person.
             </p>
+         <form method="POST" action="{% url 'order' %}">
 
             {% csrf_token %}
             <table style="text-align: left">
-                {{form.as_table}}
+                <tr>
+                    <td> {{form.as_table}} </td>
+                </tr>
+                <tr>
+                    {{order.as_table}}
+                </tr>
+
                 <tr>
                     <td></td>
 

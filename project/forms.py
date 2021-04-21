@@ -1,5 +1,5 @@
 from django.forms import ModelForm, SelectMultiple, MultipleChoiceField, CheckboxSelectMultiple, \
-    ModelMultipleChoiceField, ChoiceField, Form
+    ModelMultipleChoiceField, ChoiceField, Form, RadioSelect, inlineformset_factory
 from django.forms import Textarea
 from project.models import *
 
@@ -27,11 +27,25 @@ class ResearcherForm(ModelForm, Form):
         fields = ["first_name", "last_name", "email", "orcid"]
 
 
-options = [('Date of Swab', 'Date of Swab'),
+options_info = [('Date of Swab', 'Date of Swab'),
            ('Type of Sample', 'Type of Sample'),
            ('CT values', 'CT values'),
            ('Type of Test', 'Type of Test'),
            ('Result of Test', 'Result of Test')]
+
+options_rna = [('Magnetic Bead Extraction','Magnetic Bead Extraction'),
+               ('Spin Column Extraction', 'Spin Column Extraction'),
+               ('No RNA Extraction', 'No RNA Extraction')
+]
+
+
+# OrderFormset = inlineformset_factory(
+#     Researcher, Order, fields=("institution",
+#                                "project_title", "project_description", "positive_samples",
+#                                "negative_samples", "sample_information", 'RNA_extraction'),
+#     extra=1, can_order=False, can_delete=False
+# )
+
 
 
 class OrderForm(ModelForm, Form):
@@ -39,14 +53,19 @@ class OrderForm(ModelForm, Form):
 
     sample_information = MultipleChoiceField(
         widget=CheckboxSelectMultiple,
-        choices=options
+        choices=options_info
+    )
+    RNA_extraction = MultipleChoiceField(
+        widget=RadioSelect,
+        choices=options_rna
     )
 
     class Meta:
         # model = Researcher
         # fields = ["first_name", "last_name", "email", "orcid"]
 
+
         model = Order
-        fields = [ "institution", "project_title",
-                  "project_description", "positive_samples", "negative_samples", "sample_information"
+        fields = ["institution", "project_title", "project_description", "positive_samples",
+                   "negative_samples", "sample_information", 'RNA_extraction'
                   ]
