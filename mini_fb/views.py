@@ -47,7 +47,7 @@ class CreateProfileView(CreateView):
 
 
 class UpdateProfileView(UpdateView):
-    """Create a view for the create profile form"""
+    """Create a view for the update profile form"""
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_fb/update_profile_form.html"

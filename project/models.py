@@ -3,9 +3,11 @@
 # Database models for the Covid-19 Biobank
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
+from django.urls import reverse
 
 
 class Contact(models.Model):
@@ -26,10 +28,20 @@ class Researcher(models.Model):
     last_name = models.CharField(max_length=400)
     email = models.EmailField()
     orcid = models.CharField(max_length=16)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         """String rep of the name of the person requesting samples"""
         return f"{self.first_name} {self.last_name}, {self.orcid}"
+
+    def get_order_form(self):
+        """get status message for a profile"""
+        return Order.objects.filter(researcher=self)
+
+    def get_absolute_url(self):
+        """Provide a url to show this object"""
+        # profile/<int:pk>
+        return reverse('personal', kwargs={'pk': self.pk})
 
 
 class Order(models.Model):
@@ -46,7 +58,7 @@ class Order(models.Model):
 
     def __str__(self):
         """String rep of the name of the person requesting samples"""
-        return f" {self.date_request}: {self.project_title} "
+        return f" {self.date_request}: {self.project_title}, {self.researcher} "
 
 
 class Samples(models.Model):

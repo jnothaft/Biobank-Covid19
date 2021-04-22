@@ -39,15 +39,6 @@ options_rna = [('Magnetic Bead Extraction','Magnetic Bead Extraction'),
 ]
 
 
-# OrderFormset = inlineformset_factory(
-#     Researcher, Order, fields=("institution",
-#                                "project_title", "project_description", "positive_samples",
-#                                "negative_samples", "sample_information", 'RNA_extraction'),
-#     extra=1, can_order=False, can_delete=False
-# )
-
-
-
 class OrderForm(ModelForm, Form):
     """For to order COVID-19 samples"""
 
@@ -55,7 +46,7 @@ class OrderForm(ModelForm, Form):
         widget=CheckboxSelectMultiple,
         choices=options_info
     )
-    RNA_extraction = MultipleChoiceField(
+    RNA_extraction = ChoiceField(
         widget=RadioSelect,
         choices=options_rna
     )

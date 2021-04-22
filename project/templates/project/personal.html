@@ -4,7 +4,31 @@
 
 {% block content %}
 
-<h1 style="padding-left:16px;">Welcome, {{request.user}}</h1>
+<h1 style="padding-left:16px;">Welcome, {{researcher.first_name}}!</h1>
+
+<h2>Your Orders</h2>
+    <table style="text-align: left">
+        <tr>
+            <th>Time</th>
+            <th>Project Title</th>
+            <th>Number of positive samples</th>
+            <th>Number of negative samples</th>
+        </tr>
+        <tr style="font-size:small">
+
+            {% for order in researcher.get_order_form %}
+                <td>{{order.date_request}}</td>
+                <td>{{order.project_title}}</td>
+                <td>{{order.positive_samples}}</td>
+                <td>{{order.negative_samples}}</td>
+
+                <td>
+                </td>
+            <br>
+        </tr>
+
+    </table>
+            {% endfor %}
 
 {% endblock %}
 

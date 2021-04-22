@@ -1,0 +1,13 @@
+<!-- project/researcher_form.html -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+<form method="POST" action="{% url 'researcher' %}">
+    {% csrf_token %}
+    {{form.as_table}}
+    <button type="submit">SUBMIT</button>
+</form>
+
+
+{% endblock %}
