@@ -60,6 +60,11 @@ class Order(models.Model):
         """String rep of the name of the person requesting samples"""
         return f" {self.date_request}: {self.project_title}, {self.researcher} "
 
+    def get_absolute_url(self):
+        """Provide a url to show this object"""
+        # quote/<int:pk>
+        return reverse('orders', kwargs={'pk': self.pk})
+
 
 class Samples(models.Model):
     """Create a model to store information about the samples in the biobank"""

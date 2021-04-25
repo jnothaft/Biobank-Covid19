@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 from project.models import Contact, Order, Samples
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse, request, HttpResponseRedirect
@@ -63,7 +63,7 @@ class OrderCreate(LoginRequiredMixin, CreateView):
     """Create fields for the sample request form"""
     model = Order
     form_class = OrderForm
-    template_name = "project/order.html"
+    template_name = "project/order_form.html"
     # success_url = reverse_lazy("thanks")
     success_url = "../../thanks"
     request_form = OrderForm()
@@ -77,6 +77,29 @@ class OrderCreate(LoginRequiredMixin, CreateView):
         self.object.researcher = Researcher.objects.filter(user=self.request.user).first()
         self.object.save() # save to the database
         return HttpResponseRedirect(self.get_success_url())
+
+
+class OrderPageView(DetailView):
+    """Display a single order object"""
+    model = Order  # retrieve Quote objects from the database
+    template_name = "project/view_order.html"
+    context_object_name = "orders"
+
+
+class UpdateOrderView(LoginRequiredMixin, UpdateView):
+    """View to update the order form"""
+    model = Order
+    form_class = UpdateOrderForm
+    template_name = "project/update_order.html"
+    login_url = "/login"
+    queryset = Order.objects.all()
+
+    # def get_success_url(self):
+    #     """Return  the url to which we should be directed after the update"""
+    #     # read the URL data values into variables
+    #     researcher_pk = Researcher.kwargs['researcher.pk']
+    #
+    #     return reverse('personal', kwargs={'pk': researcher_pk})
 
 
 class CreateResearcherView(CreateView, LoginRequiredMixin):
@@ -102,7 +125,7 @@ class CreateResearcherView(CreateView, LoginRequiredMixin):
 #     """Create fields for the sample request form"""
 #     model = Researcher
 #     form_class = ResearcherForm
-#     template_name = "project/order.html"
+#     template_name = "project/order_form.html"
 #     success_url = "../../thanks"
 #     request_form = ResearcherForm()
 #     login_url = "/login"

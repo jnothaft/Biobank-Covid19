@@ -60,3 +60,27 @@ class OrderForm(ModelForm, Form):
         fields = ["institution", "project_title", "project_description", "positive_samples",
                    "negative_samples", "sample_information", 'RNA_extraction'
                   ]
+
+
+class UpdateOrderForm(ModelForm, Form):
+    """A form to update a Order Form Object"""
+
+    sample_information = MultipleChoiceField(
+        widget=CheckboxSelectMultiple,
+        choices=options_info
+    )
+    RNA_extraction = ChoiceField(
+        widget=RadioSelect,
+        choices=options_rna
+    )
+
+    class Meta:
+        # model = Researcher
+        # fields = ["first_name", "last_name", "email", "orcid"]
+
+
+        model = Order
+        fields = ["institution", "project_title", "project_description", "positive_samples",
+                   "negative_samples", "sample_information", 'RNA_extraction'
+                  ]
+

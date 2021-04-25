@@ -3,32 +3,53 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+          text-align: center;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 16px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
 
 <h1 style="padding-left:16px;">Welcome, {{researcher.first_name}}!</h1>
 
-<h2>Your Orders</h2>
-    <table style="text-align: left">
+<h2 style="padding-left:16px;">Your Orders:</h2>
+
+    <table>
+
         <tr>
             <th>Time</th>
             <th>Project Title</th>
-            <th>Number of positive samples</th>
-            <th>Number of negative samples</th>
+            <th>Order Details</th>
+            <th>Update Order</th>
+            <th>Cancel Order</th>
         </tr>
+        {% for order in researcher.get_order_form %}
         <tr style="font-size:small">
 
-            {% for order in researcher.get_order_form %}
+
                 <td>{{order.date_request}}</td>
                 <td>{{order.project_title}}</td>
-                <td>{{order.positive_samples}}</td>
-                <td>{{order.negative_samples}}</td>
+                <td><a href="{% url 'orders' order.pk %}">View</a></td>
+                <td><a href="{% url 'update_order' order.pk %}">Update</a></td>
 
-                <td>
-                </td>
-            <br>
+
+
         </tr>
-
+        {% endfor %}
     </table>
-            {% endfor %}
+
 
 {% endblock %}
 

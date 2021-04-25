@@ -1,0 +1,64 @@
+<!-- about/view_order.html -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+
+<h2 style="padding-left:16px;">Order {{orders.pk}} Details:</h2>
+
+<table>
+
+    <tr>
+        <td><b>Institution</b></td>
+        <td>{{orders.institution}}</td>
+    </tr>
+    <tr>
+        <td><b>Project Title</b></td>
+        <td>{{orders.project_title}}</td>
+    </tr>
+    <tr>
+        <td><b>Project Description</b></td>
+        <td>{{orders.project_description}}</td>
+    </tr>
+    <tr>
+        <td><b>Number of Positive Samples</b></td>
+        <td>{{orders.positive_samples}}</td>
+    </tr>
+    <tr>
+        <td><b>Number of Negative Samples</b></td>
+        <td>{{orders.negative_samples}}</td>
+    </tr>
+    <tr>
+        <td><b>Sample Information Requested</b></td>
+        <td>{{orders.sample_information}}</td>
+    </tr>
+    <tr>
+        <td><b>Type of RNA Extraction Requested</b></th>
+        <td>{{orders.RNA_extraction}}</td>
+    </tr>
+
+
+</table>
+
+
+
+
+
+{% endblock %}
