@@ -1,3 +1,8 @@
+# project/admin.py
+# Julia Santos Nothaft
+# Admin page to register models
+
+
 from django.contrib import admin
 
 # Register your models here.

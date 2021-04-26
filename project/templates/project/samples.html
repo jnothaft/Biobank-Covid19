@@ -1,12 +1,30 @@
-<!-- about/inventory.html
+<!-- project/samples.html
 Julia Santos Nothaft (jnothaft@bu.edu)
- Page displaying the inventory graphs of the samples available-->
+ Page displaying all the samples in the database-->
+
 
 {% extends 'project/base.html' %}
 
 {% block content %}
-            <style>
-                * {
+  <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+          text-align: center;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 16px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+        * {
                   box-sizing: border-box;
                 }
 
@@ -57,55 +75,43 @@ Julia Santos Nothaft (jnothaft@bu.edu)
                     margin-top: 0;
                   }
                 }
-
-            </style>
+    </style>
 
 <br><br>
-<a href="{% url 'samples' %}" style="float: right;"><button>View Inventory of All Samples</button></a>
-
-<h1 style="padding-left:16px">Biobank Inventory</h1>
-
-
-
-
-
-
-
-
-
-
-<p style="text-align:justify; padding-left:16px; padding-right:16px">
-    Samples were collected by the anterior nares self-administered “nasal swab” method
-    of acquisition and were tested using the RT-PCR method.
-
-    <br><br><b>Disclaimer:</b> The samples available in the lab are not related to the university
-    testing data. The information displayed on this website is related to the available
-    samples in the COVID-19 Biobank.
-
+<a href="{% url 'inventory' %}" style="float: right;"><button>Return to Inventory Page</button></a>
+<h1 style="padding-left:16px;"> Sample Inventory</h1>
+<p style="padding-left:16px;">
+    Below is displayed all the available sample information in the Biobank
 </p>
 
-<table style="text-align:center; padding-left:16px">
+<table>
     <tr>
-        <th>Total Samples Available</th>
-        <th>Positive Samples</th>
-        <th>Negative Samples</th>
-    </tr>
-        <td>10,000</td>
-        <td>2,100</td>
-        <td>7,900</td>
-        <td></td>
+        <th>Encrypted Sample ID:</th>
+        <th>Sample Collection Date:</th>
+        <th>Test Result:</th>
+        <th>Sample Type:</th>
+        <th>Test Type:</th>
 
-    <tr>
+        <th>Collection Site:</th>
+    </tr>
+    {% for sample in samples %}
+    <tr style="font-size:small">
+        <td>{{sample.user_id}}</td>
+        <td>{{sample.test_dates}}</td>
+        <td>{{sample.sample_results}}</td>
+        <td>{{sample.test_type}}</td>
+        <td>{{sample.sample_type}}</td>
+        <td>{{sample.collection_site}}</td>
+
 
     </tr>
+    {% endfor %}
 </table>
-<center>
-<h3>Number of Positive Samples per Month</h3>
-<img src="http://cs-people.bu.edu/jnothaft/graph_dates.png" style="max-width:1000">
 
-<h3>Number of Positive and Negative Samples Available</h3>
-<img src="http://cs-people.bu.edu/jnothaft/graph_test.png" style="max-width:1000">
-</center>
+
+
+
+
 
 
 {% endblock %}

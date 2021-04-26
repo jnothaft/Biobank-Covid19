@@ -1,3 +1,8 @@
+# project/forms.py
+# Julia Santos Nothaft
+# Form page to create forms
+
+
 from django.forms import ModelForm, SelectMultiple, MultipleChoiceField, CheckboxSelectMultiple, \
     ModelMultipleChoiceField, ChoiceField, Form, RadioSelect, inlineformset_factory
 from django.forms import Textarea

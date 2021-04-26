@@ -1,5 +1,10 @@
+# project/admin.py
+# Julia Santos Nothaft
+# Views of the web application
+
+
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from project.models import Contact, Order, Samples
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse, request, HttpResponseRedirect
@@ -25,10 +30,11 @@ class AboutPageView(TemplateView):
     template_name = "project/about.html"
 
 
-class SchedulePageView(TemplateView):
-    """ A specialized version of Template View to display our schedule page"""
-
-    template_name = "project/schedule.html"
+class SamplePageView(ListView):
+    """ A specialized version of List View to display all samples information"""
+    model = Samples
+    template_name = "project/samples.html"
+    context_object_name = 'samples'
 
 
 class ContactCreate(CreateView):
@@ -45,6 +51,11 @@ class ContactCreate(CreateView):
 class ThankYouView(TemplateView):
     """Create a thank you page after the form is successfully submitted"""
     template_name = "project/thanks.html"
+
+
+class ThankYouDeleteView(TemplateView):
+    """Create a thank you page after the form is successfully submitted"""
+    template_name = "project/thanks_delete.html"
 
 
 def thanks(request):
@@ -120,6 +131,42 @@ class CreateResearcherView(CreateView, LoginRequiredMixin):
         self.object.save() # save to the database
         return HttpResponseRedirect(self.get_success_url())
 
+
+class DeleteOrderView(DeleteView):
+    """Delete a order"""
+    template_name = "project/delete_order.html"
+    queryset = Order.objects.all()
+
+    def get_context_data(self, **kwargs):
+        """Return a dictionary with context data for this template to use"""
+        # obtain default context data
+        context = super(DeleteOrderView, self).get_context_data(**kwargs)
+
+        # find status message
+        order = Order.objects.get(pk=self.kwargs['pk'])
+        context['pk'] = order
+
+        return context
+
+    def get_object(self):
+        """Return the Order object that should be deleted"""
+        # read the URL data values into variables
+        order_pk = self.kwargs['pk']
+
+        # find the Order object, and return it
+        order = Order.objects.get(pk=self.kwargs['pk'])
+        return order
+
+    def get_success_url(self):
+        """Return  the url to which we should be directed after the delete"""
+        # read the URL data values into variables
+        # researcher_pk = self.kwargs['profile_pk']
+        researcher_pk = self.kwargs['pk']
+
+        # profile = StatusMessage.objects.get(pk=self.kwargs['profile_pk'])
+        # person = profile.profile
+        # return reverse('personal', kwargs={'pk': researcher_pk})
+        return redirect('thanks_delete')
 
 # class OrderCreate(LoginRequiredMixin, CreateView):
 #     """Create fields for the sample request form"""
