@@ -21,9 +21,65 @@ Julia Santos Nothaft (jnothaft@bu.edu)
         tr:nth-child(even) {
           background-color: #dddddd;
         }
+        * {
+                  box-sizing: border-box;
+                }
+
+                button {
+                  background-color: #CC0000;
+                  color: white;
+                  padding: 12px 20px;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  float: right;
+                }
+
+                button:hover {
+                  background-color: #B00000;
+                }
+
+
+                .container {
+                  border-radius: 5px;
+                  background-color: #f2f2f2;
+                  padding: 20px;
+                }
+
+                .col-25 {
+                  float: left;
+                  width: 25%;
+                  margin-top: 6px;
+                }
+
+                .col-75 {
+                  float: left;
+                  width: 75%;
+                  margin-top: 6px;
+                }
+
+                /* Clear floats after the columns */
+                .row:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+
+                /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+                @media screen and (max-width: 600px) {
+                  .col-25, .col-75, input[type=submit] {
+                    width: 10%;
+                    margin-top: 0;
+                  }
+                }
     </style>
 
-<h2 style="padding-left:16px;">Order {{orders.pk}} Details:</h2>
+<div>
+    <a href="{% url 'personal' orders.researcher.pk%}"><button>Go Back to my Profile</button></a>
+    <h2 style="padding-left:16px;">Order {{orders.pk}} Details:</h2>
+</div>
+
+
 
 <table>
 
@@ -49,7 +105,7 @@ Julia Santos Nothaft (jnothaft@bu.edu)
     </tr>
     <tr>
         <td><b>Sample Information Requested</b></td>
-        <td>{{orders.sample_information}}</td>
+        <td>{{orders.sample_information | cut:"[" | cut:"]" | cut:"'" }}</td>
     </tr>
     <tr>
         <td><b>Type of RNA Extraction Requested</b></th>

@@ -8,10 +8,6 @@ Home page of the website-->
 
 {% block content %}
 
-<!--<h1> Hello, world!</h1>-->
-<!--<p>-->
-<!--    This is our first Django web application-->
-<!--</p>-->
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -39,15 +35,83 @@ img {
   margin-right: auto;
 }
 
+        * {
+                  box-sizing: border-box;
+                }
+
+                button {
+                  background-color: #CC0000;
+                  color: white;
+                  padding: 12px 20px;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  float: right;
+                  margin: 5px  10px 10px 16px;
+                  align: right
+                }
+
+                button: hover{
+                  background-color: #B00000;
+                }
+
+
+                .container {
+                  border-radius: 5px;
+                  background-color: #f2f2f2;
+                  padding: 20px;
+                }
+
+                .col-25 {
+                  float: left;
+                  width: 25%;
+                  margin-top: 6px;
+                }
+
+                .col-75 {
+                  float: left;
+                  width: 75%;
+                  margin-top: 6px;
+                }
+
+                /* Clear floats after the columns */
+                .row:after {
+                  content: "";
+                  display: table;
+                  clear: both;
+                }
+
+                /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+                @media screen and (max-width: 600px) {
+                  .col-25, .col-75, input[type=submit] {
+                    width: 10%;
+                    margin-top: 0;
+                  }
+                }
+
 </style>
 </head>
-<body>
+
 
     <div style="padding-left:16px; background-image:
     url('http://d279m997dpfwgl.cloudfront.net/wp/2020/09/20-1317-COVTESTING-080-1000x667.jpg');
     background-repeat: no-repeat; background-size: cover; height:667">
               <br><br>
-<!--            <header style="color:white"> <h1>PDC Covid-19 Biobank </h1></header>-->
+            {% for researcher in researchers %}
+            {% if researcher.user == request.user %}
+                {{researcher.pk}}
+
+                 <a href="{% url 'personal' researcher.pk%}"><button>Go to my profile page</button></a>
+            {% endif %}
+            {% endfor %}
+
+
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'researcher' %}"><button>Create Profile</button></a>
+            {% endif %}
+
+
               <table style="color:white">
                  <tr>
                      <td>
@@ -147,7 +211,7 @@ img {
 
 
 
-</body>
+
 
 {% endblock %}
 

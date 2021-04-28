@@ -60,6 +60,20 @@ Page displaying the order to update-->
                   background-color: #B00000;
                 }
 
+                button {
+                  background-color: #CC0000;
+                  color: white;
+                  padding: 12px 20px;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  float: right;
+                }
+
+                button:hover {
+                  background-color: #B00000;
+                }
+
                 .container {
                   border-radius: 5px;
                   background-color: #f2f2f2;
@@ -95,7 +109,11 @@ Page displaying the order to update-->
 
             </style>
 
-<h1 style="text-indent: 12px;">Update Order</h1>
+<div>
+    <a href="{% url 'personal' object.researcher.pk %}"><button>Go Back to my Profile</button></a>
+    <h1 style="text-indent: 12px;">Update Order</h1>
+</div>
+
 
             <p style="text-indent: 12px;">
 
