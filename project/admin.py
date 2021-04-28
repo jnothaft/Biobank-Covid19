@@ -16,3 +16,4 @@ admin.site.register(Order)
 
 admin.site.register(Samples)
 
+admin.site.register(ProfileImage)

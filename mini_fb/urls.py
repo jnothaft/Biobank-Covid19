@@ -1,7 +1,10 @@
 # mini_fb/urls.py
 # Julia Santos Nothaft (jnothaft@bu.edu)
 # urls for the mini_fb app
+from django.conf.urls.static import static
 from django.urls import path
+
+from biobank_database import settings
 from .views import *
 
 urlpatterns = [
@@ -16,5 +19,9 @@ urlpatterns = [
    path('create_profile', CreateProfileView.as_view(), name="create_profile"),
 
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
 
 # post_status_message.as_view()

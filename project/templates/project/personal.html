@@ -97,7 +97,29 @@ Julia Santos Nothaft (jnothaft@bu.edu)
 <!--{% if request.user.is_authenticated %}-->
 <!--<a href="{% url 'researcher' %}"><button>Create Profile</button></a>-->
 <!--{% endif %}-->
-<h1 style="padding-left:16px;">Welcome, {{researcher.first_name}}!</h1>
+
+<div>
+    <h1 style="padding-left:16px;">Welcome, {{researcher.first_name}}!</h1>
+    {% for researcher in researcher.get_profile_image %}
+    {% if researcher.image %}
+    <img src='{{researcher.image.url}}' style='height: 200; padding-left:16px;'>
+    {% endif %}
+    {% endfor %}
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <h2 style="padding-left:16px;">Your Orders:</h2>
 
@@ -128,9 +150,24 @@ Julia Santos Nothaft (jnothaft@bu.edu)
         {% endfor %}
     </table>
 
-<!--    {{object}}-->
 
+<h2 style="padding-left:16px;">Upload a Profile Picture:</h2>
 
+<form method="POST" action="{% url 'personal_upload_image' researcher.pk%}" enctype="multipart/form-data">
+    {% csrf_token %}
+<table>
+    <tr>
+        <td>
+            {{upload_image_form.as_table}}
+        </td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td> <button type="submit">SUBMIT</button> </td>
+    </tr>
+</table>
+</form>
 
 {% endblock %}
 

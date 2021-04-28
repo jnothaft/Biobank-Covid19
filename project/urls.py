@@ -2,7 +2,10 @@
 # Julia Santos Nothaft (jnothaft@bu.edu)
 # description: direct URL requests to view functions
 
+from django.conf.urls.static import static
 from django.urls import path
+
+from biobank_database import settings
 from .views import *
 
 urlpatterns = [
@@ -18,6 +21,11 @@ urlpatterns = [
     path('orders/<int:pk>/delete', DeleteOrderView.as_view(), name="delete_order"),
     path('services', ServicesView.as_view(), name='services'),
     path('personal/<int:pk>', PersonalPageView.as_view(), name='personal'),
+    path('personal/<int:pk>/upload_image', post_image, name="personal_upload_image"),
     path('researcher', CreateResearcherView.as_view(), name='researcher'),
     path('sample_upload', sample_upload, name='sample_upload'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

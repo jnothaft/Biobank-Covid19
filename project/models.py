@@ -38,10 +38,26 @@ class Researcher(models.Model):
         """get status message for a profile"""
         return Order.objects.filter(researcher=self)
 
+    def get_profile_image(self):
+        """get status message for a profile"""
+        return ProfileImage.objects.filter(researcher=self)
+
     def get_absolute_url(self):
         """Provide a url to show this object"""
         # profile/<int:pk>
         return reverse('personal', kwargs={'pk': self.pk})
+
+
+class ProfileImage(models.Model):
+    """Model the data attributes of Facebook status message"""
+    researcher = models.ForeignKey(Researcher, on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(blank=True)
+
+    def __str__(self):
+        """Retrieve a string representation of the status message"""
+
+        return f'{self.researcher} '
+
 
 
 class Order(models.Model):

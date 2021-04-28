@@ -2,11 +2,12 @@
 # Julia Santos Nothaft
 # Form page to create forms
 
-
+from django import forms
 from django.forms import ModelForm, SelectMultiple, MultipleChoiceField, CheckboxSelectMultiple, \
     ModelMultipleChoiceField, ChoiceField, Form, RadioSelect, inlineformset_factory
 from django.forms import Textarea
 from project.models import *
+
 
 
 class ContactForm(ModelForm):
@@ -26,10 +27,18 @@ class ContactForm(ModelForm):
 
 class ResearcherForm(ModelForm, Form):
     """For to order COVID-19 samples"""
-
     class Meta:
         model = Researcher
-        fields = ["first_name", "last_name", "email", "orcid"]
+        fields = ["first_name", "last_name", "email", "orcid",]
+
+
+class ProfileImageForm(ModelForm, Form):
+    """For to order COVID-19 samples"""
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = ProfileImage
+        fields = ["image"]
 
 
 options_info = [('Date of Swab', 'Date of Swab'),

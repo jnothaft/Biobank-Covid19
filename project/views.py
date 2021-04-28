@@ -228,6 +228,39 @@ class CreateResearcherView(CreateView, LoginRequiredMixin, BasePageView):
         return HttpResponseRedirect(self.get_success_url())
 
 
+def post_image(request, pk):
+    """
+    Process a form submission to post a new status message.
+    """
+
+    # if and only if we are processing a POST request, try to read the data
+    if request.method == 'POST':
+
+        # print(request.POST) # for debugging at the console
+
+        # create the form object from the request's POST data
+        form = ProfileImageForm(request.POST or None, request.FILES or None)
+
+        if form.is_valid():
+            # create the StatusMessage object with the data in the CreateStatusMessageForm
+            image = form.save(commit=False)  # don't commit to database yet
+
+            # find the profile that matches the `pk` in the URL
+            researcher = Researcher.objects.get(pk=pk)
+
+            # attach FK profile to this status message
+            image.researcher = researcher
+
+            # now commit to database
+            image.save()
+        else:
+            print("Error: the form was not valid.")
+
+    # redirect to a new url, display person page
+    url = reverse('personal', kwargs={'pk': pk})
+    return redirect(url)
+
+
 # fix this one
 class PersonalPageView(LoginRequiredMixin, DetailView):
     """user personal page"""
@@ -236,27 +269,17 @@ class PersonalPageView(LoginRequiredMixin, DetailView):
     login_url = "/login"
     context_object_name = "researcher"
 
-    #
-    # def get_object(self):
-    #     """Return the Order object that should be deleted"""
-    #     # read the URL data values into variables
-    #     researcher_pk = self.kwargs['pk']
-    #
-    #     # find the Order object, and return it
-    #     order = Order.objects.get(pk=self.kwargs['pk'])
-    #     return order
+    def get_context_data(self, **kwargs):
+        """Return the context data (a dictionary) to be used in the template."""
 
-    # def get_context_data(self, **kwargs):
-    #     """Return the context data (a dictionary) to be used in the template."""
-    #
-    #     # obtain the default context data (a dictionary) from the superclass;
-    #     # this will include the Profile record to display for this page view
-    #     context = super(PersonalPageView, self).get_context_data(**kwargs)
-    #     # create a new CreateStatusMessageForm, and add it into the context dictionary
-    #     form = OrderForm()
-    #     context['order_form'] = form
-    #     # return this context dictionary
-    #     return context
+        # obtain the default context data (a dictionary) from the superclass;
+        # this will include the Profile record to display for this page view
+        context = super(PersonalPageView, self).get_context_data(**kwargs)
+        # create a new CreateStatusMessageForm, and add it into the context dictionary
+        form = ProfileImageForm()
+        context['upload_image_form'] = form
+        # return this context dictionary
+        return context
 
 
 def sample_upload(request):

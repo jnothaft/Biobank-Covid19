@@ -96,7 +96,7 @@ Julia Santos Nothaft (jnothaft@bu.edu)
 
             </style>
 <h2 style="padding-left:16px">Please finish registering your account:</h2>
-<form method="POST" action="{% url 'researcher' %}">
+<form method="POST" action="{% url 'researcher' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         <tr>
