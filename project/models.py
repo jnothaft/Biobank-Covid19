@@ -5,7 +5,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 from django.urls import reverse
 
@@ -49,7 +48,7 @@ class Researcher(models.Model):
 
 
 class ProfileImage(models.Model):
-    """Model the data attributes of Facebook status message"""
+    """Model to upload an image file associated with a researcher"""
     researcher = models.ForeignKey(Researcher, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(blank=True)
 
@@ -57,7 +56,6 @@ class ProfileImage(models.Model):
         """Retrieve a string representation of the status message"""
 
         return f'{self.researcher} '
-
 
 
 class Order(models.Model):
